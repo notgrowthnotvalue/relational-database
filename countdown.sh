@@ -1,8 +1,8 @@
 #!/bin/bash
 
 # Program that counts down to zero from a given argument
-echo -e "\n~~ Countdown Timer ~~\n"
-if [[ $1 -gt 0 ]]
+echo -e "\n~~ Countdown Timer ~~\n" # \n adds new lines to the beginning and end
+if [[ $1 -gt 0 ]] # If argument greater than 0
 then 
 : '
   for (( i = $1; i>=0; i--))
@@ -15,8 +15,8 @@ I=$1
 while [[ $I -ge 0 ]]
 do 
   echo $I
-  (( I-- ))
-  sleep 1
+  (( I-- )) # decrement by one
+  sleep 1   # one second pause
 done
 else 
   echo Include a positive integer as the first argument.

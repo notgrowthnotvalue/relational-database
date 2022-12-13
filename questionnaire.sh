@@ -7,7 +7,7 @@ QUESTION2="Where are you from?"
 QUESTION3="What's your favorite coding website?"
 
 echo $QUESTION1
-read NAME
+read NAME       # Input from user
 
 echo $QUESTION2
 read LOCATION

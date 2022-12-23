@@ -5,9 +5,10 @@
 PSQL="psql -X --username=freecodecamp --dbname=students --no-align --tuples-only -c"
 echo $($PSQL "TRUNCATE students, majors, courses, majors_courses")
 
-cat courses.csv | while IFS="," read MAJOR COURSE
+cat courses.csv | while IFS="," read MAJOR COURSE  # read courses.csv, pipe to read data ignore "," delimiter 
 
 do
+  # check if this is a title row. If it is not, executes the while loop
   if [[ $MAJOR != major ]]
   then
     # get major_id
@@ -48,7 +49,8 @@ do
     fi
 
     # insert into majors_courses
-    INSERT_MAJORS_COURSES_RESULT=$($PSQL "INSERT INTO majors_courses(major_id, course_id) VALUES($MAJOR_ID,$COURSE_ID)")
+    INSERT_MAJORS_COURSES_RESULT=$($PSQL "INSERT INTO majors_courses(major_id,
+     course_id) VALUES($MAJOR_ID,$COURSE_ID)")
     if [[ $INSERT_MAJORS_COURSES_RESULT == "INSERT 0 1" ]]
     then
       echo "Inserted into majors_courses, $MAJOR : $COURSE"
@@ -71,7 +73,8 @@ do
       
     fi
     #insert student
-    INSERT_STUDENT_RESULT=$($PSQL "INSERT INTO students(first_name, last_name, major_id, gpa) VALUES('$FIRST', '$LAST', $MAJOR_ID, $GPA)")
+    INSERT_STUDENT_RESULT=$($PSQL "INSERT INTO students(first_name,
+     last_name, major_id, gpa) VALUES('$FIRST', '$LAST', $MAJOR_ID, $GPA)")
     if [[ $INSERT_STUDENT_RESULT == "INSERT 0 1" ]]
     then
       echo "Inserted into students, $FIRST $LAST"
